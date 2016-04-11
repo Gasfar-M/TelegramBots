@@ -12,7 +12,8 @@ namespace TelegramBots
 
 		static void Main(string[] args)
 		{
-
+			var newRequest = new PostRequest();
+			var result = newRequest.MakePostRequest("", "getUpdates", null);
 		}
 	}
 }

@@ -16,19 +16,18 @@ namespace TelegramBots
 
 			using (var webClient = new WebClient())
 			{
-				// Создаём коллекцию параметров
 				var pars = new NameValueCollection();
-
-				// Добавляем необходимые параметры в виде пар ключ, значение
-				foreach (var field in fields)
+				byte[] response;
+				if (fields != null)
 				{
-					pars.Add(field.Key, field.Value);
+					foreach (var field in fields)
+					{
+						pars.Add(field.Key, field.Value);
+					}
 				}
-				
-				// Посылаем параметры на сервер
-				// Может быть ответ в виде массива байт
-				var response = webClient.UploadValues(url, "POST", pars);
-
+				else
+					pars.Add("", "");
+				response = webClient.UploadValues(url, "POST", pars);
 				var result = System.Text.Encoding.UTF8.GetString(response);
 				return result;
 			}
